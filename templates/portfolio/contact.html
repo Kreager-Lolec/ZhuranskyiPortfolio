@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}ZhuranskyiPortfolio - Contact{% endblock %}
+
+{% block content %}
+<!-- Contact Hero Section -->
+<section class="hero-gradient text-white py-16 rounded-b-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center">
+            <h1 class="text-4xl font-bold mb-4">Get in Touch</h1>
+            <p class="text-xl">Have questions or feedback? I'd love to hear from you!</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Content -->
+<section class="py-12 bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto">
+            <div class="glassmorphism-card p-8 rounded-lg border border-purple-700">
+                <h2 class="text-2xl font-bold text-gray-100 mb-6">Contact Information</h2>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-6 w-6 text-purple-400 mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-100">Email</h3>
+                            <p class="mt-1 text-gray-300">juranskiy59@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-6 w-6 text-purple-400 mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-100">Working Hours</h3>
+                            <p class="mt-1 text-gray-300">Monday - Friday: 9am - 5pm</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-10">
+                    <h2 class="text-2xl font-bold text-gray-100 mb-6">Send me a Message</h2>
+                    
+                    {% if messages %}
+                    <div class="mb-6">
+                        {% for message in messages %}
+                            <div class="p-4 rounded-lg {% if message.tags == 'success' %}bg-green-800 text-green-100{% else %}bg-red-800 text-red-100{% endif %}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-6">
+                            <div class="sm:col-span-2">
+                                <label for="{{ form.name.id_for_label }}" class="block text-sm font-medium text-gray-200">Name</label>
+                                {{ form.name }}
+                                {% if form.name.errors %}
+                                <p class="mt-2 text-sm text-red-400">{{ form.name.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="sm:col-span-2">
+                                <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-gray-200">Email</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                <p class="mt-2 text-sm text-red-400">{{ form.email.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="sm:col-span-2">
+                                <label for="{{ form.subject.id_for_label }}" class="block text-sm font-medium text-gray-200">Subject</label>
+                                {{ form.subject }}
+                                {% if form.subject.errors %}
+                                <p class="mt-2 text-sm text-red-400">{{ form.subject.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="sm:col-span-2">
+                                <label for="{{ form.message.id_for_label }}" class="block text-sm font-medium text-gray-200">Message</label>
+                                {{ form.message }}
+                                {% if form.message.errors %}
+                                <p class="mt-2 text-sm text-red-400">{{ form.message.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="sm:col-span-2">
+                                <button type="submit" class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                    Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
